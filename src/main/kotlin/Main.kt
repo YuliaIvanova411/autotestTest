@@ -14,7 +14,7 @@ fun commission (account : String, amountTM : Int, amount : Int) : Int = when {
 }
 
 
-fun main() {
+fun main(mayPay: Boolean) {
     val mayPay = when {
         accountType!== "VKPay" && (amount > MAX_DAY || amountThisMonth > MAX_MONTH) -> false
         accountType == "VKPay" && (amount > MAX_VK || amountThisMonth > MAX_VK_MONTH) -> false
