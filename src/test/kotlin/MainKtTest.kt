@@ -99,13 +99,48 @@ class MainKtTest {
         val maxVkMonth = 40000
 
 
-        val mayPay = when {
-            accountType !== "VKPay" && (amount > maxDay || amountThisMonth > maxMonth) -> false
-            accountType == "VKPay" && (amount > maxVk || amountThisMonth > maxVkMonth) -> false
-            else -> true
-        }
-        val result = main(mayPay)
-        assertEquals("Ваша комиссия составит " + commission(accountType, amountThisMonth, amount) + " руб.", mayPay )
+        val result = mayPay(
+        accountType = accountType,
+        amountThisMonth = amountThisMonth,
+        amount = amount)
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun mainOkMore() {
+        val accountType = "MasterCard"
+        val amountThisMonth = 500
+        val amount = 5000
+        val maxDay = 150000
+        val maxMonth = 600000
+        val maxVk = 15000
+        val maxVkMonth = 40000
+
+
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount)
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun mainOkOneMore() {
+        val accountType = "Maestro"
+        val amountThisMonth = 500
+        val amount = 5000
+        val maxDay = 150000
+        val maxMonth = 600000
+        val maxVk = 15000
+        val maxVkMonth = 40000
+
+
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(true, result)
     }
     @Test
     fun mainCantPayVkBigDay() {
@@ -118,13 +153,12 @@ class MainKtTest {
         val maxVkMonth = 40000
 
 
-        val mayPay = when {
-            accountType !== "VKPay" && (amount > maxDay || amountThisMonth > maxMonth) -> false
-            accountType == "VKPay" && (amount > maxVk || amountThisMonth > maxVkMonth) -> false
-            else -> true
-        }
-        val result = main(mayPay)
-        assertEquals("Вы превысили лимит.", mayPay )
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(false, result)
     }
     @Test
     fun mainCantPayVkBigMonth() {
@@ -136,14 +170,12 @@ class MainKtTest {
         val maxVk = 15000
         val maxVkMonth = 40000
 
-
-        val mayPay = when {
-            accountType !== "VKPay" && (amount > maxDay || amountThisMonth > maxMonth) -> false
-            accountType == "VKPay" && (amount > maxVk || amountThisMonth > maxVkMonth) -> false
-            else -> true
-        }
-        val result = main(mayPay)
-        assertEquals("Вы превысили лимит.", mayPay )
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(false, result)
     }
     @Test
     fun mainCantPayBigMonth() {
@@ -156,13 +188,12 @@ class MainKtTest {
         val maxVkMonth = 40000
 
 
-        val mayPay = when {
-            accountType !== "VKPay" && (amount > maxDay || amountThisMonth > maxMonth) -> false
-            accountType == "VKPay" && (amount > maxVk || amountThisMonth > maxVkMonth) -> false
-            else -> true
-        }
-        val result = main(mayPay)
-        assertEquals("Вы превысили лимит.", mayPay )
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(false, result)
     }
     @Test
     fun mainCantPayBigDay() {
@@ -174,12 +205,61 @@ class MainKtTest {
         val maxVk = 15000
         val maxVkMonth = 40000
 
-        val mayPay = when {
-            (accountType !== "VKPay") && ((amount > maxDay) || (amountThisMonth > maxMonth)) -> false
-            accountType == "VKPay" && (amount > maxVk || amountThisMonth > maxVkMonth) -> false
-            else -> true
-        }
-        val result = main(mayPay)
-        assertEquals("Вы превысили лимит.", result )
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(false, result)
     }
+    @Test
+    fun mainOkVkpayDay() {
+        val accountType = "VKPay"
+        val amountThisMonth = 500
+        val amount = 5000
+        val maxDay = 150000
+        val maxMonth = 600000
+        val maxVk = 15000
+        val maxVkMonth = 40000
+
+
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(true, result)
+    }
+
+    @Test
+    fun mainOkVkpayMonth() {
+        val accountType = "VKPay"
+        val amountThisMonth = 500
+        val amount = 5000
+        val maxDay = 150000
+        val maxMonth = 600000
+        val maxVk = 15000
+        val maxVkMonth = 40000
+
+
+        val result = mayPay(
+            accountType = accountType,
+            amountThisMonth = amountThisMonth,
+            amount = amount
+        )
+        assertEquals(true, result)
+    }
+}
+@Test
+fun main() {
+    val accountType = "Visa"
+    val amountThisMonth = 5000000
+    val amount = 5000
+    val maxDay = 150000
+    val maxMonth = 600000
+    val maxVk = 15000
+    val maxVkMonth = 40000
+
+    val result = main()
+    assertEquals("Ваша комиссия составит " + commission(accountType, amountThisMonth, amount) + " руб.", result)
 }

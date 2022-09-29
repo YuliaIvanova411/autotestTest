@@ -12,13 +12,12 @@ fun commission (account : String, amountTM : Int, amount : Int) : Int = when {
     account == "Visa" || account == "Мир" -> (amount*0.0075).toInt()
     else -> (amount * 0.006 + 20).toInt()
 }
-
+fun mayPay(accountType: String, amountThisMonth: Int, amount: Int) = when {
+    accountType!== "VKPay" && (amount > MAX_DAY || amountThisMonth > MAX_MONTH) -> false
+    accountType == "VKPay" && (amount > MAX_VK || amountThisMonth > MAX_VK_MONTH) -> false
+    else -> true}
 
 fun main(mayPay: Boolean) {
-    val mayPay = when {
-        accountType!== "VKPay" && (amount > MAX_DAY || amountThisMonth > MAX_MONTH) -> false
-        accountType == "VKPay" && (amount > MAX_VK || amountThisMonth > MAX_VK_MONTH) -> false
-        else -> true}
 
     if (mayPay) println("Ваша комиссия составит " + commission(accountType, amountThisMonth, amount) + " руб.")
     else println("Вы превысили лимит.")
