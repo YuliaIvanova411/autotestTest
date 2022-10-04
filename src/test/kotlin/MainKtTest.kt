@@ -15,7 +15,7 @@ class MainKtTest {
             amountTM = amountThisMonth,
             amount = amount
         )
-        assertEquals(150, result)
+        assertEquals(50, result)
     }
 
     @Test
