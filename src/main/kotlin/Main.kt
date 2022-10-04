@@ -19,7 +19,9 @@ fun mayPay(accountType: String, amountThisMonth: Int, amount: Int) = when {
 
 fun main(mayPay: Boolean) {
 
-    if (mayPay) println("Ваша комиссия составит " + commission(accountType, amountThisMonth, amount) + " руб.")
+    val result = if (mayPay) println("Ваша комиссия составит " + commission(accountType, amountThisMonth, amount) + " руб.")
     else println("Вы превысили лимит.")
+    return result
 
 }
+

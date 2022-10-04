@@ -250,16 +250,3 @@ class MainKtTest {
         assertEquals(true, result)
     }
 }
-@Test
-fun main() {
-    val accountType = "Visa"
-    val amountThisMonth = 5000000
-    val amount = 5000
-    val maxDay = 150000
-    val maxMonth = 600000
-    val maxVk = 15000
-    val maxVkMonth = 40000
-
-    val result = main()
-    assertEquals("Ваша комиссия составит " + commission(accountType, amountThisMonth, amount) + " руб.", result)
-}
